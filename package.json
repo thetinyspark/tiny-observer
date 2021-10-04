@@ -1,6 +1,6 @@
 {
   "name": "@thetinyspark/tiny-observer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny libray which implements the 'Observer' design pattern and let your implements your own according to an interface",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
