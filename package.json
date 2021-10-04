@@ -1,7 +1,7 @@
 {
-  "name": "your-project-name",
-  "version": "0.0.1",
-  "description": "Your project description",
+  "name": "@thetinyspark/tiny-observer",
+  "version": "1.0.0",
+  "description": "A tiny libray which implements the 'Observer' design pattern and let your implements your own according to an interface",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thetinyspark/your-project-name.git"
+    "url": "git+https://github.com/thetinyspark/tiny-observer.git"
   },
   "keywords": [
     "typescript",
@@ -26,9 +26,9 @@
   "author": "The Tiny Spark <contact@the-tiny-spark.com> (http://the-tiny-spark.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thetinyspark/your-project-name/issues"
+    "url": "https://github.com/thetinyspark/tiny-observer/issues"
   },
-  "homepage": "https://github.com/thetinyspark/your-project-name#readme",
+  "homepage": "https://github.com/thetinyspark/tiny-observer#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "^3.8.1",
