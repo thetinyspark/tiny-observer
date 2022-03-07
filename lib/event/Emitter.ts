@@ -21,8 +21,10 @@ export default class Emitter implements IEmitter{
     }
 
     unsubscribe(eventType: string, observer: Function): void {
-        if( this.isObserver(eventType, observer ))
-            this._observers.delete(eventType);
+        if( this.isObserver(eventType, observer )){
+            const observers = this._observers.get(eventType);
+            observers.splice(observers.indexOf(observer),1);
+        }
     }
 
     isObserver(eventType: string, observer: Function): boolean {

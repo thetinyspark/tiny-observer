@@ -181,5 +181,17 @@ describe(
             }
         );
 
+        it( 
+            "Lorsque je souscris plusieurs abonnements pour le même évènement, je dois pouvoir en supprimer un en particulier sans supprimer les autres", 
+            ()=>{
+
+                emitter.subscribe(eventType, observer); 
+                emitter.subscribe(anotherEventType, observer2 );
+                emitter.unsubscribe(eventType, observer);
+                
+                expect(emitter.hasObservers(eventType)).toBeTrue();
+            }
+        );
+
     }
 )
