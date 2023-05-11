@@ -8,7 +8,7 @@ describe(
         
         let observer:Function = ()=>{}; 
         let observer2:Function = ()=>{}; 
-        let emitter:IEmitter = new Emitter();
+        let emitter:Emitter = new Emitter();
         const eventType:string = "myevent";
         const anotherEventType:string = "anotherevent";
 
@@ -186,10 +186,33 @@ describe(
             ()=>{
 
                 emitter.subscribe(eventType, observer); 
-                emitter.subscribe(anotherEventType, observer2 );
+                emitter.subscribe(eventType, observer2 );
                 emitter.unsubscribe(eventType, observer);
                 
                 expect(emitter.hasObservers(eventType)).toBeTrue();
+            }
+        );
+
+        it( 
+            "Lorsque je souscris à un évènement, je dois pouvoir le faire pour un certain nombre de fois", 
+            ()=>{
+                // given 
+                const num:number=10;
+                var counter:number = 0;
+                const func = ()=>counter++;
+                emitter.subscribe("test", func, num); 
+
+                // when 
+                for( let i = 0; i <= num+1; i++ ){
+                    emitter.emit("test",{});
+                }
+
+                const results = emitter.hasObservers("test");
+                emitter.unsubscribeAll();
+
+                // then
+                expect(counter).toEqual(num);
+                expect(results).toBeFalse();
             }
         );
 
