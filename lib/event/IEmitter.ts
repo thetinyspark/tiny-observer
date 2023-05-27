@@ -4,6 +4,6 @@ export default interface IEmitter{
     isObserver(eventType:string, subscriber:Function):boolean;
     unsubscribe(eventType:string, subscriber:Function):void;
     unsubscribeAll():void;
-    emit(eventType:string, payload:any):void;
+    emit(eventType:string, payload:any, promised:boolean):void|Promise<any>;
     hasObservers(eventType:string): boolean;
 }

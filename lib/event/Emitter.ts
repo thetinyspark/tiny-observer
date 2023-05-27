@@ -8,20 +8,25 @@ export default class Emitter implements IEmitter{
 
     private _observers:Map<string,ObserverCB[]> = new Map<string,ObserverCB[]>();
 
-    emit(eventType: string, payload:any ): void {
+    emit(eventType: string, payload:any, promised:boolean=false ): void|Promise<any> {
         const observers:ObserverCB[] = this._observers.get(eventType) || [];
         const notif:INotification = new Notification(eventType, this, payload);
-        observers.forEach(
+        const values = observers.map(
             (observer:ObserverCB)=>{
+                let result = null;
                 if( observer.limit > 0 || observer.infinite){
-                    observer.func(notif);
                     observer.limit--;
+                    result = observer.func(notif);
                 }
                 else{
                     this.unsubscribe(eventType, observer.func);
                 }
+
+                if (promised)
+                    return Promise.resolve(result);
             }
-        )
+        );
+        return Promise.all(values);
     }
 
     hasObservers(eventType: string): boolean {

@@ -215,6 +215,29 @@ describe(
                 expect(results).toBeFalse();
             }
         );
+        it( 
+            "Lorsque j'émets un évènement je dois pouvoir récupérer une promesse qui retourne toutes les valeurs renvoyées par les callbacks", 
+            async ()=>{
+                // given 
+                const func1 = ()=>10;
+                const func2 = ()=>20;
+                const func3 = ()=>30;
+                const func4 = ()=>null;
+                const func5 = ()=>{};
+                emitter.subscribe("test", func1, 1); 
+                emitter.subscribe("test", func2, 1); 
+                emitter.subscribe("test", func3, 1); 
+                emitter.subscribe("test", func4, 1); 
+                emitter.subscribe("test", func5, 1); 
+
+                // when 
+                const results = await emitter.emit("test",{}, true);
+                emitter.unsubscribeAll();
+
+                // then
+                expect(results).toEqual([10,20,30,null,undefined]);
+            }
+        );
 
     }
 )
